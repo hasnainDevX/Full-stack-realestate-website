@@ -7,6 +7,7 @@ import NotFound from "./Routes/NotFound";
 import SinglePage from "./Routes/SinglePage";
 import Login from "./Routes/Login";
 import Register from "./Routes/Register";
+import ProfilePage from "./Routes/ProfilePage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route path="/list/:id" element={<SinglePage/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<Register />} />
+          <Route path="/profile" element={<ProfilePage />} />
 
           {/* Catch all route for 404 */}
           <Route path="*" element={<NotFound />} />

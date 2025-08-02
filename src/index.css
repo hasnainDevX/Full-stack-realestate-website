@@ -9,3 +9,23 @@ body {
     overflow-x: hidden !important;
 }
 
+.wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: transparent;
+}
+
+.wrapper::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+/* Show scrollbar on hover */
+.wrapper:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 100, 100, 0.5); /* Customize color */
+  border-radius: 4px;
+}
+
+.wrapper:hover::-webkit-scrollbar {
+  background-color: rgba(0, 0, 0, 0.1); /* Optional scrollbar track */
+}

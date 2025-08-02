@@ -39,7 +39,7 @@ const Navbar = () => {
           Agents
         </Link>
       </div>
-      <div className="right h-full flex-1 flex items-center justify-end md:bg-[#fcf5f3] gap-2 bg-transparent">
+      <div className="right h-full flex-2 flex items-center justify-end md:bg-[#fcf5f3] gap-2 bg-transparent">
         <Link
           to="/login"
           className="md:block hidden px-3 py-2 m-2 rounded"
