@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 const Card = ({ item }) => {
   return (
-    <div className="card bg-white flex gap-5 my-6">
-      <Link to={`/list/${item.id}`}  className="imageContainer flex-2 h-[200px]">
+    <div className="card bg-white flex sm:flex-row flex-col gap-5 my-6">
+      <Link to={`/list/${item.id}`}  className="imageContainer flex-2 md:h-[200px] ">
         <img
           src={item.img}
           alt="property-image"
-          className="object-cover w-full h-full rounded-sm"
+          className="object-cover w-full h-full rounded-sm max-w-[]"
         />
       </Link>
       <div className="textContainer flex flex-col justify-center gap-3 flex-3">
