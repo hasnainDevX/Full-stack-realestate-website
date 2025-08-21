@@ -1,8 +1,21 @@
 import Chat from "../Components/Chat";
 import Profilelist from "../Components/MyprofileList";
 import React from "react";
+import apiRequest from "../lib/apiRequest";
+import { Navigate } from "react-router-dom";
 
 function ProfilePage() {
+  const handleLogout = async ()=> {
+    try {
+      const res = apiRequest.post("/auth/logout");
+      localStorage.removeItem("user");
+      alert("Logout Successfull")
+      Navigate("/login")
+    } catch (err) {
+      console.log(err);
+      Navigate("/login")
+    }
+  }
   return (
     <div className="flex lg:h-[calc(100vh-100px)] profilePage flex-col lg:flex-row">
       <div className="flex-none md:flex-[3] md:overflow-y-scroll md:pb-[50px] details">
@@ -26,6 +39,7 @@ function ProfilePage() {
             <span className="flex items-center gap-[20px]">
               E-mail: <b>john@gmail.com</b>
             </span>
+          <button onClick={handleLogout} className="px-4 py-2 max-w-[100px] bg-[#fece51] cursor-pointer border-none">Logout</button>
           </div>
           <div className="flex items-center justify-between title">
             <h1 className="font-semibold text-3xl">My List</h1>

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const user = true;
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <nav className="h-[100px] flex space-between items-center !overflow-hidden " >
@@ -46,11 +48,11 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="right h-full flex-2 flex items-center justify-end md:bg-[#fcf5f3] gap-2 bg-transparent">
-        {user ? (
+        {currentUser ? (
           <div className="flex justify-center items-center gap-2">
             <img
               className="hidden sm:flex w-8 h-8 rounded-full object-cover border-2 border-yellow-400 shadow-sm"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxD73MLizwdNt-kYYDHausSv_AIqllBulgzg&s"
+              src={currentUser.avatar || "userimg.png"}
               alt="Profile"
             />
             <span className="hidden lg:flex">John Doe</span>
