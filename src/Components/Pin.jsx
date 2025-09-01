@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Pin = ({item}) => {
   return (
+    <>
     <Marker position={[item.latitude, item.longitude]}>
       <Popup>
         <div className="PopupContainer flex gap-4 p-3 min-w-[280px] bg-white rounded-lg shadow-lg border-0 animate-fadeIn">
@@ -25,6 +26,7 @@ const Pin = ({item}) => {
         </div>
       </Popup>
     </Marker>
+    </>
   );
 };
 
