@@ -1,19 +1,24 @@
 import Chat from "../Components/Chat";
 import Profilelist from "../Components/MyprofileList";
-import React from "react";
+import React, { useEffect } from "react";
 import apiRequest from "../lib/apiRequest";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 function ProfilePage() {
+  const { currentUser,updateUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const handleLogout = async ()=> {
     try {
-      const res = apiRequest.post("/auth/logout");
-      localStorage.removeItem("user");
-      alert("Logout Successfull")
-      Navigate("/login")
+      await apiRequest.post("/auth/logout");
+      updateUser(null)
+      navigate("/login")
     } catch (err) {
       console.log(err);
-      Navigate("/login")
+      navigate("/login")
     }
   }
   return (
@@ -22,28 +27,32 @@ function ProfilePage() {
         <div className="flex flex-col gap-[35px] md:pr-[50px] wrapper">
           <div className="flex items-center justify-between title ">
             <h1 className="font-semibold text-3xl">User Information</h1>
+            <Link to="/profile/update">
             <button className="px-4 py-2 bg-[#fece51] cursor-pointer border-none">Update Profile</button>
+            </Link>
           </div>
           <div className="flex flex-col gap-3 info">
             <span className="flex items-center gap-[20px]">
               Avatar:
               <img
                 className="w-[40px] h-[40px] rounded-full object-cover"
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src={currentUser.avatar || "userimg.png"}
                 alt=""
               />
             </span>
             <span className="flex items-center gap-[20px]">
-              Username: <b>John Doe</b>
+              Username: <b>{currentUser.username}</b>
             </span>
             <span className="flex items-center gap-[20px]">
-              E-mail: <b>john@gmail.com</b>
+              E-mail: <b>{currentUser.email}</b>
             </span>
           <button onClick={handleLogout} className="px-4 py-2 max-w-[100px] bg-[#fece51] cursor-pointer border-none">Logout</button>
           </div>
           <div className="flex items-center justify-between title">
             <h1 className="font-semibold text-3xl">My List</h1>
+            <Link to="/create-post">
             <button className="px-4 py-2 bg-[#fece51] cursor-pointer border-none">Create New Post</button>
+            </Link>
           </div>
           <Profilelist />
           <div className="title">

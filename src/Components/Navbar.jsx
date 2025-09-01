@@ -55,7 +55,7 @@ const Navbar = () => {
               src={currentUser.avatar || "userimg.png"}
               alt="Profile"
             />
-            <span className="hidden lg:flex">John Doe</span>
+            <span className="hidden lg:flex">{currentUser.username}</span>
             <Link
               to="/profile"
               className="hidden sm:flex items-center gap-2 text-sm sm:text-base md:text-lg font-medium text-gray-700 hover:text-black hover:scale-[1.03] px-3 py-2 rounded-md transition-all duration-300"

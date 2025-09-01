@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Card = ({ item }) => {
   return (
     <div className="card bg-white flex sm:flex-row flex-col gap-5 my-6">
-      <Link to={`/list/${item.id}`}  className="imageContainer flex-2 md:h-[200px] ">
+      <Link to={`/listing/${item.id}`}  className="imageContainer flex-2 md:h-[200px] ">
         <img
           src={item.img}
           alt="property-image"
@@ -13,7 +13,7 @@ const Card = ({ item }) => {
       </Link>
       <div className="textContainer flex flex-col justify-center gap-3 flex-3">
         <h2 className="title text-xl font-semibold text-[#292929e7] transition-all delay-100 ease-in-out hover:text-[#000] hover:scale-[101%]">
-          <Link to={`/list/${item.id}`}>{item.title}</Link>
+          <Link to={`/listing/${item.id}`}>{item.title}</Link>
         </h2>
         <p className="flex items-center text-slate-600 gap-2 ">
           <img className="w-4 h-4" src="/pin.png" alt="pin-image" />

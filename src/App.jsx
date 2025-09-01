@@ -1,41 +1,47 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Navbar from "./Components/Navbar";
-import Homepage from "./Routes/Homepage";
+import HomePage from "./Routes/Homepage";
 import ListPage from "./Routes/ListPage";
 import NotFound from "./Routes/NotFound";
 import SinglePage from "./Routes/SinglePage";
 import Login from "./Routes/Login";
 import Register from "./Routes/Register";
 import ProfilePage from "./Routes/ProfilePage";
+import { Layout, RequireAuth } from "./Routes/Layout"; 
+import ProfileUpdatePage from "./Routes/ProfileUpdatePage";
+import NewPostPage from "./Routes/NewPostPage";
 
-const App = () => {
-  return (
-    <div className="
-      min-h-screen
-      mx-auto 
-      px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-20
-      max-w-sm sm:max-w-2xl md:max-w-4xl lg:max-w-6xl xl:max-w-7xl 2xl:max-w-[1920px]
-      overflow-x-hidden 
-      flex flex-col
-    ">
-      <div className="navbar">
-        <Navbar />
-      </div>
-      
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/list" element={<ListPage />} />
-          <Route path="/list/:id" element={<SinglePage/>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign-up" element={<Register />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-    </div>
-  );
-};
+function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />, // Public layout with Navbar
+      children: [
+        { path: "/", element: <HomePage /> },
+        { path: "/list", element: <ListPage /> },
+        { path: "/listing/:id", element: <SinglePage /> }, 
+        { path: "/login", element: <Login /> },
+        { path: "/sign-up", element: <Register /> },
+        // NotFound fallback for public routes
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+    {
+      path: "/",
+      element: <RequireAuth />,
+      children: [
+        { path: "/profile", element: <ProfilePage /> },
+        { path: "/profile/update", element: <ProfileUpdatePage /> },
+        { path: "/create-post", element: <NewPostPage /> },
+
+        // NotFound fallback for protected routes
+        { path: "*", element: <NotFound /> },
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
+}
 
 export default App;
